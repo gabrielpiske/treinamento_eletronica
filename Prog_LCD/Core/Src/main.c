@@ -45,7 +45,7 @@ I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN PV */
 volatile int cont = 0;
-int cont_anterior = -1; // Força a primeira atualização da tela
+int cont_anterior = -1;
 uint32_t ultimo_clique = 0;
 char snum[16];
 /* USER CODE END PV */
@@ -109,7 +109,7 @@ int main(void)
     HAL_Delay(2000);
 
     HD44780_Clear();
-    HAL_Delay(50); // Aguarda limpar antes de entrar no while
+    HAL_Delay(50);
   /* USER CODE END 2 */
 
   /* Infinite loop */

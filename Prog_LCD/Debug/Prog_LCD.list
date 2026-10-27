@@ -149,7 +149,7 @@ int main(void)
 
     HD44780_Clear();
  80001a4:	f000 fb22 	bl	80007ec <HD44780_Clear>
-    HAL_Delay(50); // Aguarda limpar antes de entrar no while
+    HAL_Delay(50);
  80001a8:	2032      	movs	r0, #50	@ 0x32
  80001aa:	f000 fd01 	bl	8000bb0 <HAL_Delay>
   while (1)
