@@ -21,7 +21,8 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include <stdio.h>
+#include "liquidcrystal_i2c.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,8 +44,10 @@
 I2C_HandleTypeDef hi2c1;
 
 /* USER CODE BEGIN PV */
-int cont = 0;
-char snum[5];
+volatile int cont = 0;
+int cont_anterior = -1; // Força a primeira atualização da tela
+uint32_t ultimo_clique = 0;
+char snum[16];
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,16 +94,22 @@ int main(void)
   MX_GPIO_Init();
   MX_I2C1_Init();
   /* USER CODE BEGIN 2 */
-  //Nomral static Printing
-  HD44780_Init(2);
-  HD44780_Clear();
-  HD44780_Backlight();
-  HD44780_SetCursor(4,0);
-  HD44780_PrintStr("SENAI SC");
-  HD44780_SetCursor(0,1);
-  HD44780_PrintStr("Form. Eletronica");
-  HAL_Delay(2000);
-  HD44780_Clear();
+  // Garante que o relé comece DESLIGADO
+    HAL_GPIO_WritePin(GPIOA, Out_Rele_Pin, GPIO_PIN_SET);
+
+    HD44780_Init(2);
+    HD44780_Clear();
+    HAL_Delay(50);
+    HD44780_Backlight();
+
+    HD44780_SetCursor(4,0);
+    HD44780_PrintStr("SENAI SC");
+    HD44780_SetCursor(0,1);
+    HD44780_PrintStr("Form. Eletronica");
+    HAL_Delay(2000);
+
+    HD44780_Clear();
+    HAL_Delay(50); // Aguarda limpar antes de entrar no while
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -110,12 +119,37 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-	  HD44780_SetCursor(5,0);
-	  //HD44780_Clear();
-	  sprintf(snum, "%03d", cont);
-	  HD44780_PrintStr(snum);
-	  HAL_Delay(500);
-	  cont++;
+	  if (cont != cont_anterior)
+	      {
+	        cont_anterior = cont; // Atualiza o registro
+
+	        HD44780_Clear();
+	        HAL_Delay(20); // Pausa essencial após o Clear para não perder caracteres
+
+	        HD44780_SetCursor(0, 0);
+	        sprintf(snum, "Contagem: %02d", cont);
+	        HD44780_PrintStr(snum);
+
+	        if (cont >= 15)
+	        {
+	          // ACIONA O RELÉ E EXIBE NO DISPLAY
+	          HAL_GPIO_WritePin(GPIOA, Out_Rele_Pin, GPIO_PIN_RESET);
+	          HD44780_SetCursor(2, 1);
+	          HD44780_PrintStr("RELE ATIVADO");
+
+	          HAL_Delay(2000);
+
+	          HAL_GPIO_WritePin(GPIOA, Out_Rele_Pin, GPIO_PIN_SET);
+	          cont = 0;
+	        }
+	        else
+	        {
+	          // MANTÉM O RELÉ DESLIGADO
+	          HAL_GPIO_WritePin(GPIOA, Out_Rele_Pin, GPIO_PIN_SET);
+	        }
+	      }
+
+	      HAL_Delay(50);
   }
   /* USER CODE END 3 */
 }
@@ -237,12 +271,32 @@ static void MX_GPIO_Init(void)
   HAL_NVIC_EnableIRQ(EXTI15_10_IRQn);
 
   /* USER CODE BEGIN MX_GPIO_Init_2 */
+  	  // Reconfigura o pino D7 (Out_Rele_Pin) como Open-Drain para conseguir desligar relé de 5V
+		GPIO_InitStruct.Pin = Out_Rele_Pin;
+		GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_OD;
+		GPIO_InitStruct.Pull = GPIO_NOPULL;
+		GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;
+		HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
+		// Em Open-Drain, SET desliga (abre a chave) e RESET liga (aterra no GND)
+		HAL_GPIO_WritePin(GPIOA, Out_Rele_Pin, GPIO_PIN_SET);
   /* USER CODE END MX_GPIO_Init_2 */
 }
 
 /* USER CODE BEGIN 4 */
-
+void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
+{
+  // Verifica se a interrupção veio do botão B1
+  if (GPIO_Pin == B1_Pin)
+  {
+    // Filtro de debounce (ignora cliques com menos de 200ms de diferença)
+    if ((HAL_GetTick() - ultimo_clique) > 200)
+    {
+      cont++;
+      ultimo_clique = HAL_GetTick();
+    }
+  }
+}
 /* USER CODE END 4 */
 
 /**
