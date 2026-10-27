@@ -21,7 +21,7 @@
 #include "main.h"
 /* USER CODE BEGIN Includes */
 #include <stdio.h>
-#include "liquidcrystal_i2c.h";
+#include "liquidcrystal_i2c.h"
 
 /* USER CODE END Includes */
 
