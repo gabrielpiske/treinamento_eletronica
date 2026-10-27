@@ -3504,21 +3504,21 @@ LOAD C:/ST/STM32CubeIDE_2.2.0/STM32CubeIDE/plugins/com.st.stm32cube.ide.mcu.exte
  .debug_line    0x00005807     0x3b7b ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o
  .debug_line    0x00009382      0xe37 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
 
-.debug_str      0x00000000    0x84574
- .debug_str     0x00000000    0x84574 ./Core/Src/main.o
-                              0x80c83 (size before relaxing)
- .debug_str     0x00084574    0x7cd08 ./Core/Src/stm32f1xx_hal_msp.o
- .debug_str     0x00084574    0x7c85b ./Core/Src/stm32f1xx_it.o
- .debug_str     0x00084574     0x98fa ./Core/Src/syscalls.o
- .debug_str     0x00084574     0x76a4 ./Core/Src/sysmem.o
- .debug_str     0x00084574    0x7c6ed ./Core/Src/system_stm32f1xx.o
- .debug_str     0x00084574       0x74 ./Core/Startup/startup_stm32f103rbtx.o
- .debug_str     0x00084574    0x7d172 ./Drivers/STM32F1xx_HAL_Driver/Src/liquidcrystal_i2c.o
- .debug_str     0x00084574    0x7ce20 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
- .debug_str     0x00084574    0x7cd6c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
- .debug_str     0x00084574    0x7ca73 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
- .debug_str     0x00084574    0x7d7b4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o
- .debug_str     0x00084574    0x7cb1c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
+.debug_str      0x00000000    0x845c6
+ .debug_str     0x00000000    0x845c6 ./Core/Src/main.o
+                              0x80ca5 (size before relaxing)
+ .debug_str     0x000845c6    0x7cd2a ./Core/Src/stm32f1xx_hal_msp.o
+ .debug_str     0x000845c6    0x7c85b ./Core/Src/stm32f1xx_it.o
+ .debug_str     0x000845c6     0x98fa ./Core/Src/syscalls.o
+ .debug_str     0x000845c6     0x76a4 ./Core/Src/sysmem.o
+ .debug_str     0x000845c6    0x7c6ed ./Core/Src/system_stm32f1xx.o
+ .debug_str     0x000845c6       0x74 ./Core/Startup/startup_stm32f103rbtx.o
+ .debug_str     0x000845c6    0x7d194 ./Drivers/STM32F1xx_HAL_Driver/Src/liquidcrystal_i2c.o
+ .debug_str     0x000845c6    0x7ce20 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal.o
+ .debug_str     0x000845c6    0x7cd6c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_cortex.o
+ .debug_str     0x000845c6    0x7ca73 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_gpio.o
+ .debug_str     0x000845c6    0x7d7b4 ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_i2c.o
+ .debug_str     0x000845c6    0x7cb1c ./Drivers/STM32F1xx_HAL_Driver/Src/stm32f1xx_hal_rcc.o
 
 .comment        0x00000000       0x43
  .comment       0x00000000       0x43 ./Core/Src/main.o
