@@ -60,8 +60,8 @@ all: main-build
 main-build: Prog_LCD.elf secondary-outputs
 
 # Tool invocations
-Prog_LCD.elf Prog_LCD.map: $(OBJS) $(USER_OBJS) C:\Users\gabriel_piske\Documents\GitHub\treinamento_eletronica\acelerometro\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
-	arm-none-eabi-gcc -o "Prog_LCD.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\gabriel_piske\Documents\GitHub\treinamento_eletronica\acelerometro\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Prog_LCD.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
+Prog_LCD.elf Prog_LCD.map: $(OBJS) $(USER_OBJS) C:\Users\gabri\Documents\Github\Git\ -\ SENAI\treinamento_eletronica\acelerometro\STM32F103RBTX_FLASH.ld makefile objects.list $(OPTIONAL_TOOL_DEPS)
+	arm-none-eabi-gcc -o "Prog_LCD.elf" @"objects.list" $(USER_OBJS) $(LIBS) -mcpu=cortex-m3 -T"C:\Users\gabri\Documents\Github\Git - SENAI\treinamento_eletronica\acelerometro\STM32F103RBTX_FLASH.ld" --specs=nosys.specs -Wl,-Map="Prog_LCD.map" -Wl,--gc-sections -static --specs=nano.specs -mfloat-abi=soft -mthumb -u _printf_float -Wl,--start-group -lc -lm -Wl,--end-group
 	@echo 'Finished building target: $@'
 	@echo ' '
 
