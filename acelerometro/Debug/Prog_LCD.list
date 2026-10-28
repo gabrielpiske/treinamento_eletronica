@@ -2635,7 +2635,7 @@ static void ExpanderWrite(uint8_t _data)
  800160e:	230a      	movs	r3, #10
  8001610:	9300      	str	r3, [sp, #0]
  8001612:	2301      	movs	r3, #1
- 8001614:	217e      	movs	r1, #126	@ 0x7e
+ 8001614:	214e      	movs	r1, #78	@ 0x4e
  8001616:	4804      	ldr	r0, [pc, #16]	@ (8001628 <ExpanderWrite+0x34>)
  8001618:	f000 fd0a 	bl	8002030 <HAL_I2C_Master_Transmit>
 }
